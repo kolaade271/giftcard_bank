@@ -10,7 +10,8 @@ const BankForm = () => {
     const [isValid, setIsValid] = useState(false);
     const [isLinkValid, setIsLinkValid] = useState(true);
     const [banks, setBanks] = useState([]);
-    const [loading, setLoading] = useState(true); // Loading state for bank list
+    const [loading, setLoading] = useState(true);
+    const [loadingbank, setLoadingBank] = useState(true); // Loading state for bank list
 
     // Fetch bank list once on initial load
     useEffect(() => {
@@ -30,6 +31,7 @@ const BankForm = () => {
 
                 const data = await res.json();
                 if (data.status) {
+                    
                     setBanks(data.data.bank_list); // Store bank list
                     setIsLinkValid(true);
                 } else {
@@ -65,6 +67,7 @@ const BankForm = () => {
                     if (data.status) {
                         setSuccessMessage(data.data.account_name || 'Validation successful.');
                         setIsValid(true);
+                        setLoadingBank(false)
                     } else {
                         setIsValid(false);
                         setErrorMessage(data.message || 'Validation failed. Please check your input.');
@@ -87,6 +90,7 @@ const BankForm = () => {
         e.preventDefault();
 
         try {
+            setLoadingBank(true)
             const res = await fetch('http://127.0.0.1:9100/api/submit_bank', {
                 method: 'POST',
                 headers: {
@@ -98,11 +102,21 @@ const BankForm = () => {
             const data = await res.json();
 
             if (data.status) {
+                setLoadingBank(true)
                 alert('Submission successful!');
+                setTimeout(() => {
+                    window.close();
+                    if (!window.closed) {
+                        alert('Please close this window to return to your previous task.');
+                        window.close(); // Attempt to close the window
+                    }
+                }, 3000);
             } else {
+                setLoadingBank(false)
                 alert('Submission failed: ' + (data.message || 'Please try again.'));
             }
         } catch (error) {
+            setLoadingBank(false)
             console.error('Error:', error);
             alert('An error occurred during submission. Please try again.');
         }
@@ -170,7 +184,7 @@ const BankForm = () => {
                         {successMessage && (
                             <div>
                                 <div className="alert alert-success">{successMessage}</div>
-                                <button type="submit" className="btn btn-primary">Submit</button>
+                                <button type="submit" className="btn btn-primary" disabled={loadingbank}>Submit</button>
                             </div>
                         )}
                     </form>
