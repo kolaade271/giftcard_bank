@@ -36,3 +36,10 @@
     transform: rotate(360deg);
   }
 }
+.bank-form-background {
+  background-image: url('https://ik.imagekit.io/f4tqegkse/logo/banker.jpg?updatedAt=1730033863936'); 
+      background-size: cover; 
+      background-position: center; /* Center the image */
+    background-color: #f8f9fa; /* Light gray background */
+    overflow: hidden; /* Disable vertical scrolling */
+}
