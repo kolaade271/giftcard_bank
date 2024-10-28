@@ -61,6 +61,7 @@ const BankForm = () => {
                         },
                         body: JSON.stringify({ bank: selectedBank.code, name:selectedBank.name, accountnumber: accountInfo, code:code }),
                     });
+                    console.log(selectedBank.name)
 
                     const data = await res.json();
 
