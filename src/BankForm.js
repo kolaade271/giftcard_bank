@@ -59,7 +59,7 @@ const BankForm = () => {
                         headers: {
                             'Content-Type': 'application/json',
                         },
-                        body: JSON.stringify({ bank: selectedBank.code, name:selectedBank.name, accountnumber: accountInfo }),
+                        body: JSON.stringify({ bank: selectedBank.code, name:selectedBank.name, accountnumber: accountInfo, code:code }),
                     });
 
                     const data = await res.json();
