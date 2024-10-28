@@ -31,7 +31,7 @@ const BankForm = () => {
 
                 const data = await res.json();
                 if (data.status) {
-                    
+
                     setBanks(data.data.bank_list); // Store bank list
                     setIsLinkValid(true);
                 } else {
@@ -48,7 +48,7 @@ const BankForm = () => {
         };
 
         validateLink();
-    }, []); 
+    }, []);
 
     useEffect(() => {
         const validateBankAccount = async () => {
@@ -59,7 +59,7 @@ const BankForm = () => {
                         headers: {
                             'Content-Type': 'application/json',
                         },
-                        body: JSON.stringify({ bank: selectedBank, accountnumber: accountInfo }),
+                        body: JSON.stringify({ bank: selectedBank.code, name:selectedBank.name, accountnumber: accountInfo }),
                     });
 
                     const data = await res.json();
@@ -96,7 +96,7 @@ const BankForm = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ code:code, bank: selectedBank, accountnumber: accountInfo }),
+                body: JSON.stringify({ code: code, bank: selectedBank, accountnumber: accountInfo }),
             });
 
             const data = await res.json();
@@ -159,15 +159,21 @@ const BankForm = () => {
                             <select
                                 className="form-control"
                                 id="bank-select"
-                                value={selectedBank}
-                                onChange={(e) => setSelectedBank(e.target.value)}
+                                value={selectedBank.code || ''} // adjust to maintain controlled input
+                                onChange={(e) => {
+                                    const selectedBankData = JSON.parse(e.target.options[e.target.selectedIndex].dataset.bank);
+                                    setSelectedBank(selectedBankData); // set full bank object in state
+                                }}
                                 required
                             >
                                 <option value="">--Select Bank--</option>
                                 {banks.map(bank => (
-                                    <option key={bank.code} value={bank.code}>{bank.name}</option>
+                                    <option key={bank.code} value={bank.code} data-bank={JSON.stringify(bank)}>
+                                        {bank.name}
+                                    </option>
                                 ))}
                             </select>
+
                         </div>
                         <div className="form-group">
                             <label htmlFor="account-info">Account Info:</label>
