@@ -17,7 +17,7 @@ const BankForm = () => {
     useEffect(() => {
         const validateLink = async () => {
             try {
-                const res = await fetch('https://cors-anywhere.herokuapp.com/http://20.62.163.56:9100/api/banks', {
+                const res = await fetch('http://bank.intiup.com.ng/api/banks', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -53,15 +53,16 @@ const BankForm = () => {
     useEffect(() => {
         const validateBankAccount = async () => {
             if (selectedBank && accountInfo.length === 10) {
+                console.log(selectedBank.name)
                 try {
-                    const res = await fetch('https://cors-anywhere.herokuapp.com/http://20.62.163.56:9100/api/bank_validate', {
+                    const res = await fetch('http://bank.intiup.com.ng/api/bank_validate', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                         },
                         body: JSON.stringify({ bank: selectedBank.code, name:selectedBank.name, accountnumber: accountInfo, code:code }),
                     });
-                    console.log(selectedBank.name)
+                    
 
                     const data = await res.json();
 
@@ -92,7 +93,7 @@ const BankForm = () => {
 
         try {
             setLoadingBank(true)
-            const res = await fetch('https://cors-anywhere.herokuapp.com/http://20.62.163.56:9100/api/submit_bank', {
+            const res = await fetch('http://bank.intiup.com.ng/api/submit_bank', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
