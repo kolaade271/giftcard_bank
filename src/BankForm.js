@@ -17,7 +17,7 @@ const BankForm = () => {
     useEffect(() => {
         const validateLink = async () => {
             try {
-                const res = await fetch('https://cors-anywhere.herokuapp.com/http://127.0.0.1:9100/api/banks', {
+                const res = await fetch('http://20.62.163.56:9100/api/banks', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -54,7 +54,7 @@ const BankForm = () => {
         const validateBankAccount = async () => {
             if (selectedBank && accountInfo.length === 10) {
                 try {
-                    const res = await fetch('http://127.0.0.1:9100/api/bank_validate', {
+                    const res = await fetch('http://20.62.163.56:9100/api/bank_validate', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -91,7 +91,7 @@ const BankForm = () => {
 
         try {
             setLoadingBank(true)
-            const res = await fetch('https://b2df-20-62-163-56.ngrok-free.app/api/submit_bank', {
+            const res = await fetch('http://20.62.163.56:9100/api/submit_bank', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
