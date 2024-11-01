@@ -19,6 +19,7 @@ const BankForm = () => {
             try {
                 const res = await fetch('https://bank.intiup.com.ng/api/banks', {
                     method: 'POST',
+                    mode: 'no-cors',
                     headers: {
                         'Content-Type': 'application/json',
                     },
