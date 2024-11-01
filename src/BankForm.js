@@ -67,7 +67,8 @@ const BankForm = () => {
                     const data = await res.json();
 
                     if (data.status) {
-                        setSuccessMessage(data.data.account_name || 'Validation successful.');
+                        console.log(data.data.data)
+                        setSuccessMessage(data.data.data.account_name || 'Validation successful.');
                         setIsValid(true);
                         setLoadingBank(false)
                     } else {
