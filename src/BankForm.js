@@ -191,7 +191,7 @@ const BankForm = () => {
                             />
                         </div>
                         {successMessage && (
-                            <div>
+                            <div align="center">
                                 <div className="alert alert-success">{successMessage}</div>
                                 <button type="submit" className="btn btn-primary" disabled={loadingbank}>Submit</button>
                             </div>
