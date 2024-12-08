@@ -17,7 +17,7 @@ const BankForm = () => {
     useEffect(() => {
         const validateLink = async () => {
             try {
-                const res = await fetch('https:// bank.intiup.com.ng/api/banks', {
+                const res = await fetch('https://bank.intiup.com.ng/api/banks', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -55,7 +55,7 @@ const BankForm = () => {
             if (selectedBank && accountInfo.length === 10) {
                 console.log(selectedBank.name)
                 try {
-                    const res = await fetch('https:// bank.intiup.com.ng/api/bank_validate', {
+                    const res = await fetch('https://bank.intiup.com.ng/api/bank_validate', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -94,7 +94,7 @@ const BankForm = () => {
 
         try {
             setLoadingBank(true)
-            const res = await fetch('https:// bank.intiup.com.ng/api/submit_bank', {
+            const res = await fetch('https://bank.intiup.com.ng/api/submit_bank', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
